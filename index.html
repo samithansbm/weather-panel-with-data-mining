@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--=================================================[FontAwesome Icons]=============================================================-->
+	    <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+      <link rel="stylesheet" href="vendor/bootstrap/css/ad-custom.css">
+
+      <link href="vendor/bootstrap/css/sb-weather.css" rel="stylesheet">
+
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>      
+      <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+      <!-- Scroll Reveal -->
+      <!--=======================================================[JQuery]===================================================================-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+      <!--===================================================[Scroll Reveal]===============================================================-->
+      <script src="vendor/scrollreveal-master/dist/scrollreveal.min.js"></script>
+
+      <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Balsamiq+Sans&family=Bellota&family=Dosis&family=Open+Sans+Condensed:wght@300&family=Pacifico&family=Quicksand&display=swap');
+        html,body {
+          background-color: #000d1a;
+          color: white;
+          
+        }
+
+        .p-default {
+          font-size: 18px;
+          font-family: 'Dosis', sans-serif;
+        }
+
+        .h-default {
+          font-size: 70px;
+          font-family: 'Abril Fatface', cursive;
+        }
+
+        a {
+          color: white;
+          transition: .6s;
+        }
+
+        
+
+        a:hover {
+          text-decoration: none;
+        }
+
+        /* Remove the navbar's default margin-bottom and rounded borders */ 
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+          }
+
+          .im-display {
+            width: 100%;
+            height: 14vh;
+            background-color: teal;
+            
+          }
+          
+          /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+          .row.content {height: 450px}
+          
+          /* Set gray background color and 100% height */
+          .sidenav {
+            padding-top: 20px;
+            background-color: rgb(20, 9, 117);
+            height: 90vh;
+          }
+
+          .sidenav i {
+            font-size: 35px;
+            padding: 18px 0px;
+            transition: .6s;
+          }
+
+          .sidenav i:hover{
+            color: rgb(9, 230, 230);
+          }
+
+          .social{
+            margin: 130px 0px;
+          }
+
+          .dark-back {
+            background-color: rgb(20, 9, 117);
+            color: rgb(231, 231, 231);
+            height: 90vh;
+          }
+
+          .dd-back {
+            background-color: rgb(24, 21, 44);
+            color: darkgray;
+            height: 100%;
+          }
+
+        .anime {
+            background-color: #555;
+            width: 100%;
+            height: 40vh;
+            
+          }
+
+          .clip {
+            position: absolute;
+            opacity: .1;
+            overflow: hidden;
+            left: 47vw;
+            top:140px;
+          }
+
+          .clip i {
+            font-size: 32em;
+            overflow: hidden;
+          }
+
+          .btn-contain {
+            margin: 30px auto;
+          }
+
+          .btn-custom {
+            text-decoration: none;
+            background-color: transparent;
+            text-transform: uppercase;
+            cursor: pointer;
+              margin:25px 10px ;
+              padding: 5px 20px;
+              width: 200px;
+              color: white;
+              border: 2px solid white;
+              font-size: 22px;
+              font-family: 'Quicksand', sans-serif;
+              border-radius:  20px;
+              transition: .6s ease-in-out;
+          }
+
+          .btn-custom:hover {
+            color: white;
+            background: rgb(9, 230, 230);
+            text-decoration: none;
+          }
+
+          /* Set black background color, white text and some padding */
+          footer {
+            color: rgb(22, 21, 21);
+            padding: 15px;
+          }
+        
+          /* On small screens, set height to 'auto' for sidenav and grid */
+          @media screen and (max-width: 767px) {
+            .sidenav {
+              height: auto;
+              padding: 15px;
+            }
+            .row.content {height:auto;} 
+          }               
+
+      </style>
+
+        <!--=======================================================[JQuery]===================================================================-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <!--===================================================[Scroll Reveal]================================================================-->
+        <script src="./vendor/scrollreveal-master/dist/scrollreveal.min.js"></script>
+    </head>
+    <body onload="getLocationGraph(6.5854, 79.9607)">
+      <div style="background-color: rgb(15, 5, 105)" style="position: fixed;">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>                        
+                </button>
+                <a class="navbar-brand" href="#">WEPredict</a>
+              </div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#About">About Us</a></li>
+                  <li><a href="#contact">Contact Us</a></li>
+                  <li><a href="#signin">Sign Up</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+            
+          <div class="container-fluid text-center"> 
+               
+            <div class="row content dark-back">
+              <div class="col-sm-2 sidenav">
+                <p class="p-default">Join Us in Social Media Sites.</p>
+                <div class="social">
+                  <p><a href="#"><i class="fab fa-facebook"></i></a></p>
+                  <p><a href="#"><i class="fab fa-twitter-square"></i></a></p>
+                  <p><a href="#"><i class="fab fa-instagram"></i></a></p>
+                  <p><a href="#"><i class="fab fa-reddit"></i></a></p>
+                  <p><a href="#"><i class="fab fa-google-plus-square"></i></a></p>
+                </div>
+                
+              </div>
+              <div class="col-sm-8 text-left dark-back">
+
+                <div class="im-display"></div>
+                <!-- Weather Plugin -->
+
+                <div >
+                  <div class="forecast-container">
+                    <div class="today forecast">
+                      <div class="forecast-header">
+                        <div class="day">Weekly Brief</div>
+                        <div class="date"><i class="far fa-calendar-minus" style="color: rgb(9, 230, 230); margin: 0 5px 0 10px;"></i><span id="currentDate">6 Oct</span></div>
+                      </div> 
+                      <div class="forecast-content">
+                        <div class="location" id="location">Colombo</div>
+                        <div class="degree">
+                          <div class="num temp">23<sup>o</sup>C</div>
+                          <div class="forecast-icon icon" style="width: 50px; margin-bottom: 52px;">
+                            <img src="images/icon/source/unknown.png" alt="" width=90>
+                          </div>	
+                        </div>
+                        <span><i class="fas fa-clock" style="color: rgb(9, 230, 230); margin: 0 5px 0 10px;"></i><span class="notification">24hrs</span></span>
+                        <span><i class="fas fa-wind" style="color: rgb(9, 230, 230); margin: 0 5px 0 10px;"></i><span id="wind">18km/h</span></span>
+                        <span><i class="fas fa-smog" style="color: rgb(9, 230, 230); margin: 0 5px 0 10px;"></i><span id="desc"></span></span>
+                      </div>
+                    </div>
+                    <div class="forecast">
+                      <div class="forecast-header">
+                        <div class="day" id="loc1">Kalutara</div>
+                      </div> 
+                      <div class="forecast-content">
+                        <div class="forecast-icon" id="icon1">
+                          <img src="images/icons/icon-3.svg" alt="" width=48>
+                        </div>
+                        <div class="degree" id="temp1">23<sup>o</sup>C</div>
+                        <small>18<sup>o</sup></small>
+                      </div>
+                    </div>
+                    <div class="forecast">
+                      <div class="forecast-header">
+                        <div class="day" id="loc2">Gampaha</div>
+                      </div> 
+                      <div class="forecast-content">
+                        <div class="forecast-icon" id="icon2">
+                          <img src="images/icons/icon-5.svg" alt="" width=48>
+                        </div>
+                        <div class="degree" id="temp2">23<sup>o</sup>C</div>
+                        <small>18<sup>o</sup></small>
+                      </div>
+                    </div>
+                    <div class="forecast">
+                      <div class="forecast-header">
+                        <div class="day" id="loc3">Galle</div>
+                      </div> 
+                      <div class="forecast-content">
+                        <div class="forecast-icon" id="icon3">
+                          <img src="images/icons/icon-7.svg" alt="" width=48>
+                        </div>
+                        <div class="degree" id="temp3">23<sup>o</sup>C</div>
+                        <small>18<sup>o</sup></small>
+                      </div>
+                    </div>
+                    <div class="forecast">
+                      <div class="forecast-header">
+                        <div class="day" id="loc4">Kandy</div>
+                      </div> 
+                      <div class="forecast-content">
+                        <div class="forecast-icon" id="icon4">
+                          <img src="images/icons/icon-12.svg" alt="" width=48>
+                        </div>
+                        <div class="degree" id="temp4">23<sup>o</sup>C</div>
+                        <small>18<sup>o</sup></small>
+                      </div>
+                    </div>
+                    <div class="forecast">
+                      <div class="forecast-header">
+                        <div class="day" id="loc5">Trincomalee</div>
+                      </div> 
+                      <div class="forecast-content">
+                        <div class="forecast-icon" id="icon5">
+                          <img src="images/icons/icon-13.svg" alt="" width=48>
+                        </div>
+                        <div class="degree" id="temp5">23<sup>o</sup>C</div>
+                        <small>18<sup>o</sup></small>
+                      </div>
+                    </div>
+                    <div class="forecast">
+                      <div class="forecast-header">
+                        <div class="day" id="loc6">Jaffna</div>
+                      </div> 
+                      <div class="forecast-content">
+                        <div class="forecast-icon" id="icon6">
+                          <img src="images/icons/icon-14.svg" alt="" width=48>
+                        </div>
+                        <div class="degree" id="temp6">23<sup>o</sup>C</div>
+                        <small>18<sup>o</sup></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <h1 class="h-default">Join Us and keep ALARMED!</h1>
+                <p class="p-default">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <div class="clip">
+                  <i class="fas fa-umbrella"></i>
+                </div>
+                <div class="btn-contain">
+                  <center>
+                    <a class="btn-custom" href="register.html">Join Us</a>
+                    <a class="btn-custom" href="register.html">Join Us</a><br>
+
+                  </center>
+                </div>
+                
+                
+              </div>
+              <div class="col-sm-2 sidenav">
+                <div class="well">
+                  <p>ADS</p>
+                </div>
+                <div class="well">
+                  <p>ADS</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="container-fluid text-center" id="About" style="height: 100vh;">    
+            <div class="row content dd-back">
+              <div class="col-sm-2 sidenav" style="background-color: tomato; background: url('images/wallpaper/weather1.png');  background-attachment: fixed; height: 100vh;"></div>
+              <div class="col-sm-8">
+                <div class="im-display" style="background: url('images/wallpaper/weather.jpg'); background-attachment: fixed;"></div>
+                <h1 class="h-default">About Us</h1>
+                <p class="p-default">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p class="p-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo saepe assumenda dolorem modi, expedita voluptatum ducimus necessitatibus. Asperiores quod reprehenderit necessitatibus harum, mollitia, odit et consequatur maxime nisi amet doloremque.</p>
+                
+              </div>
+              <div class="col-sm-2 sidenav" style="background-color: tomato; background: url('images/wallpaper/weather2.jpg');  background-attachment: fixed; height: 100vh;"></div>
+            </div>
+          </div>
+
+          <div class="container-fluid text-center" id="contact">    
+            <div class="row content dark-back">
+              <div class="col-sm-2 sidenav"></div>
+              <div class="col-sm-8">
+                
+                <h1 class="h-default">Contact Us</h1>
+                <p class="p-default">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <form action="#" class="contact-form">
+                  <div class="row">
+                    <div class="col-md-6"><input type="text" placeholder="Your name..."></div>
+                    <div class="col-md-6"><input type="text" placeholder="Email Addresss..."></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6"><input type="text" placeholder="Company name..."></div>
+                    <div class="col-md-6"><input type="text" placeholder="Website..."></div>
+                  </div>
+                  <textarea name="" placeholder="Message..."></textarea>
+                  <div class="text-right">
+                    <input type="submit" placeholder="Send message">
+                  </div>
+                </form>
+              </div>
+              <div class="col-sm-2 sidenav" ></div>
+            </div>
+          </div>
+        </div>
+          <!-- <footer class="container-fluid text-center">
+            <p>Footer Text</p>
+          </footer> -->
+
+
+
+<script type="text/javascript" src="../../assets/js/lib/greensock/plugins/ScrollToPlugin.min.js"></script>
+<script>
+  // init controller
+  var controller = new ScrollMagic.Controller();
+
+  // build tween
+  var tween = TweenMax.from("#animate", 0.5, {autoAlpha: 0, scale: 0.7});
+
+  // build scene
+  var scene = new ScrollMagic.Scene({triggerElement: "a#top", duration: 900, triggerHook: "onLeave"})
+          .setTween(tween)
+          .addIndicators() // add indicators (requires plugin)
+          .addTo(controller);
+
+  // change behaviour of controller to animate scroll instead of jump
+  controller.scrollTo(function (newpos) {
+    TweenMax.to(window, 0.9, {scrollTo: {y: newpos}});
+  });
+
+  //  bind scroll to anchor links
+  $(document).on("click", "a[href^='#']", function (e) {
+    var id = $(this).attr("href");
+    if ($(id).length > 0) {
+      e.preventDefault();
+
+      // trigger scroll
+      controller.scrollTo(id);
+
+        // if supported by the browser we can even update the URL.
+      if (window.history && window.history.pushState) {
+        history.pushState("", document.title, id);
+      }
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+
+            window.sr = ScrollReveal();
+            sr.reveal('.social', {duration: 1000});
+            sr.reveal('.forecast', {duration: 1000});
+            sr.reveal('.degree', {duration: 1000});
+            sr.reveal('.row', {duration: 1000});
+            sr.reveal('.container-fluid', {duration: 1000});
+        </script>
+        
+        <!-- Weather API Settings -->
+        <script src="js/openweatherAPI/script.js"></script>
+    </body>
+</html>

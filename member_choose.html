@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SB Admin - Login</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
+  <link href="css/sb-custom.css" rel="stylesheet">
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>      
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+  
+
+</head>
+
+<body class="bg-dark">
+
+  <div class="container">
+    
+    <div class="content-list">
+      <center>
+        <h3>CHOOSE YOUR GROUP MEMBERS</h3>
+      </center>
+      <ul id="admin-list">
+        <li>
+          <span class="list-num">No.</span>
+          <span class="list-name">Username</span>
+          <span class="list-date">Role / Category</span>
+          <span class="list-ac"><i class="far fa-check-square"></i></span>
+          
+        </li>
+
+      </ul>
+      <br>
+      <center>
+        <a onclick="groupVindow(getUrlVars()['dms'])"  class="btn btn-dark">Go Back</a>
+      </center>
+      <br>
+    </div>
+  </div>
+
+  <!-- Firestore Settings -->
+  <script src="./js/firebase/init_fire.js"></script>
+  <script src="./js/firebase/dm_crud.js"></script>
+
+  <script>
+    initFirestore();
+    function getUrlVars() {
+      var vars = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+      });
+      return vars;
+    }
+
+    function groupVindow(url){
+      window.location.href = "dm_systems.php?dms="+url;
+    }
+
+    getDataFire('accepted', true, getUrlVars()['dms']);
+
+  </script>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+</body>
+
+</html>

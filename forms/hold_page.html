@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Account | WeatherALPHA</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--=================================FontAwesome Icons=============================================-->
+  
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        <!--==================================Bootstrap Styles=============================================-->
+        <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+
+        <!--====================================Custom Styles===============================================-->
+        <link rel="stylesheet" href="../vendor/bootstrap/css/custom-form.css">
+        <link rel="stylesheet" href="../css/sb-custom.css">
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+        
+        <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+
+        
+        
+    </head>
+    <body>
+
+        <div class="load-screen">
+            <div class="loader"></div>
+        </div>
+
+       <div class="main">
+           <div class="form-box">
+                <div class="user-img"></div>
+
+                <div class="title">
+                    <center><h1>ACCOUNT IS NOT VERIFIED</h1><br></center>
+                </div>
+
+                <div class="passage">
+                    
+                        <p>Your account is not approved yet. Please try again later or Visit Home page.</p>
+                </div>
+
+                <div class="input-contain">
+                    
+                        
+
+                        <div class="form-group">
+                            <center>
+                                <a class="btn btn-light" href="../index.html"  id="btn_log">VISIT HOME</a>
+                            </center>
+                        </div>
+                    
+
+                </div>
+
+                
+           </div>
+       </div>
+        <script src="../js/firebase/app.js"></script>
+
+        <!-- New Loader -->
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+            <script>
+                setTimeout(function(){
+                    $('.load-screen').fadeToggle();
+                    
+                }, 2000);
+
+                $('#btn_log').click(function(){
+                    $('#username').blur(function(){    
+                        
+                        if($(this).val()==null){
+                            alert("Can't Keep Username Empty!");
+                            
+                        }
+                    });
+
+                    $('.load-screen').fadeToggle();
+                        setTimeout(function(){
+                            $('.load-screen').fadeOut();    
+                        }, 2000);
+                    
+                });
+            </script>  
+    </body>
+</html>

@@ -1,0 +1,135 @@
+body {
+    margin: auto;
+    padding: 0px;
+    /* background-color: #232323; */
+    
+    color:white;
+}
+
+a {
+    text-decoration: none;
+    color:rgb(49, 16, 236);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.main {
+    display: flex;
+    width: 100%;
+    height:100%;
+    
+    background: url('../../../../images/wallpaper/rain.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    justify-content: center;
+    
+}
+
+.form-box{
+    width: 650px;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-bottom: 6px solid white;
+    border-right: 2px solid white;
+    border-left: 2px solid white;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+}
+
+.user-img {
+    width: 150px;
+    height:150px;
+    border: 2px solid white;
+    border-radius: 50% 50%;
+    position: relative;
+    
+}
+
+.title{
+    flex: 0 0 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.title h1 {
+    font-size: 72px;
+}
+
+.passage {
+    flex: 0 0 80%;
+    text-align: justify;
+}
+
+.input-contain {
+    flex: 0 0 80%;
+    
+}
+.custom {
+    overflow: hidden;
+}
+
+.form-group label  {
+    transform: translateY(30px);
+    transition: 0.5s ease-in-out;
+}
+
+.form-group:hover label {
+    transform: translateY(0px);
+}
+
+.form-group input {
+    background-color: transparent;
+    border: hidden;
+    border-bottom: 2px white solid;
+    transition: 0.5s ease-in-out;
+    border-radius: 0%;
+    color: aliceblue;
+    
+}
+
+.form-group span {
+    height: 2px;
+    width: 32.4vw;
+    position: absolute;
+    overflow: hidden;
+}
+
+.half span {
+    width: 15.4vw;
+}
+
+.form-group span:after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%; 
+    background-color: rgb(0, 132, 255);
+    transform: translateX(-100%);
+    transition: 0.5s ease-in-out;
+}
+
+.form-group:hover span:after {
+    transform: translateX(0);
+}
+
+.half {
+    width: 50%;
+    position: relative;
+    float: left;
+    padding-right: 10px;
+}
+
+.form-group input:focus, .form-group input:valid {
+    background-color: transparent;
+    border-bottom: 2px rgb(36, 33, 252) solid;
+    outline-width: 0;
+    outline: none;
+    outline-color: transparent;
+}

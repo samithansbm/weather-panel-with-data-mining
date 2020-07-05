@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SB Admin - Login</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>      
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+  
+
+</head>
+
+<body class="bg-dark">
+
+  <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Enter Your Research Details</div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="text" id="inputName" class="form-control" placeholder="System / Research Name" required="required" autofocus="autofocus">
+              <label for="inputName">Name</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="radio">
+              <label>System Type</label><br>
+              <label>
+                <input type="radio" id="geo" value="Geophysical">
+                Geophysical
+              </label>
+              <label>
+                <input type="radio" id="hydro" value="Hydrological">
+                Hydrological
+              </label>
+              <label>
+                <input type="radio" id="clim" value="Climatological">
+                Climatological
+              </label>
+              <label>
+                <input type="radio" id="meteo" value="Meteorological">
+                Meteorological
+              </label>
+              <label>
+                <input type="radio" id="bio" value="Biological">
+                Biological 
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="email" id="inputSpe" class="form-control" placeholder="Specialization" autofocus="autofocus">
+              <label for="inputSpe">Specialized For</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="email" id="inputBrief" class="form-control" placeholder="Brief Description" required="required" autofocus="autofocus">
+              <label for="inputBrief">Brief Description</label>
+            </div>
+          </div>
+          
+        
+          <a class="btn btn-primary btn-block" href="#" onclick='addDMFire(getUrlVars()["user"])'>Create</a>
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="register.html">Register an Account</a>
+          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase API Settings -->
+  <script src="js/firebase/script.js"></script>
+
+  <script>
+    function getUrlVars() {
+      var vars = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+         vars[key] = value;
+      });
+      return vars;
+    }
+
+    var radios = document.querySelectorAll('input[type="radio"]');
+    console.log(radios);
+
+    radios.forEach((item)=>{
+      item.addEventListener('click', function uncheck(attri){
+        console.log("Got it");
+        if(attri.checked){
+          this.checked = false;
+        } else {
+          this.checked = true;
+        }
+      });
+    })
+
+    
+          
+
+  </script>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SB Admin - Login</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
+  <link href="css/sb-custom.css" rel="stylesheet">
+
+  
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>      
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+  <style>
+
+          
+
+           
+
+  </style>
+
+</head>
+
+<body class="bg-dark">
+
+  <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Add an Article</div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="inputTitle" class="form-control">
+            <span></span>
+            <small class="text-danger" > Entering a title is necessary</small>
+        </div>
+
+        <div class="form-group">
+            <label>Keywords</label>
+            <input type="text" id="inputKey" class="form-control" >
+            <span></span>
+            <small class="text-danger" ></small>
+        </div>
+
+          <input  type="hidden" value=""id="inputUsername">
+
+          <div class="editor-container">
+            <div class="text-area">
+
+            </div>
+            <div class="editer-area">
+                <div class="tool-set">
+                    <ul class="tool-list"> 
+                        <li class="tool">
+                            <button type="button"
+                            data-command="justifyLeft"
+                            class="btn-tool">
+                            <i class="fas fa-align-left"></i>
+                            </button>
+
+                        </li>
+
+                        <li class="tool">
+                            <button type="button"
+                            data-command="justifyRight"
+                            class="btn-tool">
+                            <i class="fas fa-align-right"></i>
+                            </button>
+
+                        </li>
+
+                        <li class="tool">
+                            <button type="button"
+                            data-command="justifyCenter"
+                            class="btn-tool">
+                            <i class="fas fa-align-center"></i>
+                            </button>
+
+                        </li>
+
+                        <li class="tool">
+                            <button type="button"
+                            data-command="justifyFull"
+                            class="btn-tool">
+                            <i class="fas fa-align-justify"></i>
+                            </button>
+
+                        </li>
+
+                        <li class="tool">
+                            <button type="button"
+                            data-command="bold"
+                            class="btn-tool">
+                            <i class="fas fa-bold"></i>
+                            </button>
+
+                        </li>
+
+                        <li class="tool">
+                            <button type="button"
+                            data-command="italic"
+                            class="btn-tool">
+                            <i class="fas fa-italic"></i>
+                            </button>
+
+                        </li>
+
+                        <li class="tool">
+                            <button type="button"
+                            data-command="underline"
+                            class="btn-tool">
+                            <i class="fas fa-underline"></i>
+                            </button>
+
+                        </li>
+
+                        <li class="tool">
+                            <button type="button"
+                            data-command="insertOrderedList"
+                            class="btn-tool">
+                            <i class="fas fa-list-ol"></i>
+                            </button>
+
+                        </li>
+
+                        <li class="tool">
+                            <button type="button"
+                            data-command="insertUnorderedList"
+                            class="btn-tool">
+                            <i class="fas fa-list-ul"></i>
+                            </button>
+
+                        </li>
+
+                        <li class="tool">
+                            <button type="button"
+                            data-command="createlink"
+                            class="btn-tool">
+                            <i class="fas fa-link"></i>
+                            </button>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="output-text" id="text-div" contenteditable="true">
+
+            </div>
+
+        </div>
+          
+          <a class="btn btn-primary btn-block" onclick="getInputsSMTP(out.innerHTML, getUrlVars()['user'], getUrlVars()['receiver'])">Add</a>
+          
+          <a class="btn btn-danger btn-block" href="#">Cancel</a>
+        </form>
+        <div class="text-center">
+          <!-- <a class="d-block small mt-3" href="register.html">Register an Account</a>
+          <a class="d-block small" href="forgot-password.html">Forgot Password?</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      initFirestore();
+
+      //Input Field Values
+      let out = document.getElementById('text-div');
+
+      let output = document.getElementsByClassName('output-text');
+      let buttons = document.getElementsByClassName('btn-tool');
+
+      
+      
+
+      function getUrlVars() {
+          var vars = {};
+          var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+              vars[key] = value;
+          });
+          return vars;
+        }
+      
+      
+      for(let btn of buttons){
+          btn.addEventListener('click', ()=>{
+              
+              let command = btn.dataset['command'];
+              
+              if(command=='createlink'){
+                  let url = prompt("Enter Hyperlink address: ", "http:\/\/");
+                  document.execCommand(command, false, url);
+
+              } else {
+                  document.execCommand(command, false, null);
+
+              }
+          });
+      }
+
+      
+  </script>
+
+  <!-- Firestore Settings -->
+  <script src="./js/firebase/init_fire.js"></script>
+
+  <!-- SMTP JS -->
+  <script src="./js/smtp/smtp.js"></script>
+  <script src="./js/smtp/main_operate.js"></script>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+</body>
+
+</html>

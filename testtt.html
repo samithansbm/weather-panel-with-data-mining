@@ -1,0 +1,54 @@
+<form class="move">
+	<fieldset>
+		<legend>Anchor Links</legend>
+		<p><a href="#top">Top</a></p>
+		<p><a href="#middle">Middle</a></p>
+		<p><a href="#bottom">Bottom</a></p>
+	</fieldset>
+</form>
+<a id="top"></a>
+<div class="spacer s1"></div>
+<a id="middle"></a>
+<div class="spacer s1"></div>
+<a id="bottom"></a>
+<div class="spacer s0"></div>
+<div id="animate" class="box1 blue" style="visibility: hidden; opacity: 0; transform: matrix(0.7, 0, 0, 0.7, 0, 0);">
+	<p>Peek-a-boo!</p>
+	<a href="#" class="viewsource">view source</a>
+</div>
+<div class="spacer s2"></div>
+<script type="text/javascript" src="../../assets/js/lib/greensock/plugins/ScrollToPlugin.min.js"></script>
+<script>
+	// init controller
+	var controller = new ScrollMagic.Controller();
+
+	// build tween
+	var tween = TweenMax.from("#animate", 0.5, {autoAlpha: 0, scale: 0.7});
+
+	// build scene
+	var scene = new ScrollMagic.Scene({triggerElement: "a#top", duration: 200, triggerHook: "onLeave"})
+					.setTween(tween)
+					.addIndicators() // add indicators (requires plugin)
+					.addTo(controller);
+
+	// change behaviour of controller to animate scroll instead of jump
+	controller.scrollTo(function (newpos) {
+		TweenMax.to(window, 0.5, {scrollTo: {y: newpos}});
+	});
+
+	//  bind scroll to anchor links
+	$(document).on("click", "a[href^='#']", function (e) {
+		var id = $(this).attr("href");
+		if ($(id).length > 0) {
+			e.preventDefault();
+
+			// trigger scroll
+			controller.scrollTo(id);
+
+				// if supported by the browser we can even update the URL.
+			if (window.history && window.history.pushState) {
+				history.pushState("", document.title, id);
+			}
+		}
+	});
+</script>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Registration | WeatherALPHA</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--=================================FontAwesome Icons=============================================-->
+  
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        <!--==================================Bootstrap Styles=============================================-->
+        <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+
+        <!--====================================Custom Styles===============================================-->
+        <link rel="stylesheet" href="../vendor/bootstrap/css/custom-form.css">
+        <link rel="stylesheet" href="../css/sb-custom.css">
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+        
+        <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        
+        
+
+    </head>
+    <body>
+
+
+       <div class="main">
+           <div class="form-box" id="form-line">
+                <div class="user-img"></div>
+
+                <div class="title">
+                    <h1>REGISTER</h1><br>
+                </div>
+
+                <div class="passage">
+                        <p>A platform is a combination of hardware and software used to run
+                            software applications. A platform can be an operating system, a
+                            computer architecture, or a combination of both. </p>
+                </div>
+
+                <div class="input-contain">
+
+                        <div class="form-group half">
+                            <label>Staff ID</label>
+                            <input type="text" id="staff" class="form-control" >
+                            <span></span>
+                            <small class="text-danger" id="st" style="overflow: hidden"> Enter a valid Staff ID that given by Department</small>
+                        </div>
+                    
+                        <div class="form-group half" >
+                            <label>Username</label>
+                            <input type="text" id="username" class="form-control" >
+                            <span></span>
+                            <small class="text-danger" id="un" style="overflow: hidden"> Enter a valid Name</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="name" class="form-control" >
+                            <span></span>
+                            <small class="text-danger" id="na"> Enter your Name</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" id="address" class="form-control" >
+                            <span></span>
+                            <small class="text-danger" id="ad"> Enter a your Address</small>
+                        </div>
+
+                        <div class="form-group half">
+                            <label>Contact</label>
+                            <input type="text" id="contact" class="form-control" >
+                            <span></span>
+                            <small class="text-danger" id="co" style="overflow: hidden"> Enter a valid Contact number</small>
+                        </div>
+
+                        <div class="form-group half">
+                            <label>Email</label>
+                            <input type="text" id="email" class="form-control" >
+                            <span></span>
+                            <small class="text-danger" id="em"> Enter a valid Email address</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="password"  class="form-control" >
+                            <span></span>
+                            <small class="text-danger" id="pa"> Password is Invalid</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" id="cpassword"  class="form-control" >
+                            <span></span>
+                            <small class="text-danger" id="cp"> Password is Invalid</small>
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-light"  id="btn_sub">REGISTER</button>
+                            If you have an account <a href="login.html"> Click here!</a> for Login!
+                        </div>
+                    
+
+                </div>
+
+                
+           </div>
+       </div>
+       <script src="../js/firebase/app.js"></script>
+        
+        <script>
+           
+
+            $(document).ready(function(){
+            $("input").focus(function(){
+                $('label').css("transform", "translateY(0px)");
+            });
+            });
+
+        </script>
+    </body>
+</html>
